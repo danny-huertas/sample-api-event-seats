@@ -7,6 +7,7 @@ public class IntegrationTestConstants {
     public static final String COUNT_END_POINT = "/{" + PATH_PARAM_EVENT_ID + "}/count";
     public static final String OPERATION_RESULT = "operation.result";
     public static final String OPERATION_CORRELATION_ID = "operation.correlationId";
+    public static final String OPERATION_ERRORS_SIZE = "operation.errors.size()";
     public static final String OPERATION_ERRORS_ERROR_CODE = "operation.errors[0].errorCode";
     public static final String OPERATION_ERRORS_ERROR_MESSAGE = "operation.errors[0].errorMessage";
     public static final String OPERATION_ERRORS_MORE_INFO = "operation.errors[0].moreInfo";

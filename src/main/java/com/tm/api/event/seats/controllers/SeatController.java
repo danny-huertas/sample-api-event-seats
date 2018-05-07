@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.Instant;
-import java.util.Collections;
 
 /**
  * REST controller for Event Seats API. (The reference documentation is built with Swagger)
@@ -73,7 +72,7 @@ public class SeatController {
         //build and return the response dto object
         return new SeatResponseDto.SeatResponseDtoBuilder().setSeatCount(seatCount).setOperation(
                 new Operation.ApiOperationBuilder().result(Result.OK)
-                        .correlationId(tracer.getCurrentSpan().traceIdString()).errors(Collections.emptyList())
+                        .correlationId(tracer.getCurrentSpan().traceIdString())
                         .requestInstant(Instant.ofEpochMilli(tracer.getCurrentSpan().getBegin()).toString()).build())
                 .build();
     }

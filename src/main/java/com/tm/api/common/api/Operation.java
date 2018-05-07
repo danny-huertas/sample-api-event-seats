@@ -3,6 +3,7 @@ package com.tm.api.common.api;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,7 +47,7 @@ public class Operation {
     public static class ApiOperationBuilder {
         private Result builderResult;
         private String builderCorrelationId;
-        private List<Error> builderErrors;
+        private List<Error> builderErrors = new ArrayList<>();
         private Object builderRequestInstant;
 
         public ApiOperationBuilder result(Result result) {

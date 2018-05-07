@@ -4,6 +4,7 @@ import static com.tm.api.event.seats.constants.IntegrationTestConstants.PATH_PAR
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import com.tm.api.EventSeatsApplication;
+import com.tm.api.common.api.Result;
 import com.tm.api.event.seats.configuration.SpringRootConfig;
 import com.tm.api.event.seats.constants.IntegrationTestConstants;
 import io.restassured.RestAssured;
@@ -34,12 +35,13 @@ public class GetSeatTest {
     }
 
     @Test
-    public void getSeatCountAllSuccessTest() {
+    public void getSeatCountAllForEventSuccessTest() {
         RestAssured.given().when().pathParam(PATH_PARAM_EVENT_ID, IntegrationTestConstants.EVENT_ID).when()
                 .get(IntegrationTestConstants.COUNT_END_POINT).then().statusCode(HttpStatus.SC_OK)
-                .body("seatCount", equalTo(100)).body(IntegrationTestConstants.OPERATION_RESULT, equalTo("OK"))
+                .body("seatCount", equalTo(100))
+                .body(IntegrationTestConstants.OPERATION_RESULT, equalTo(String.valueOf(Result.OK)))
                 .body(IntegrationTestConstants.OPERATION_CORRELATION_ID, notNullValue())
-                .body("operation.errors.size()", equalTo(0))
+                .body(IntegrationTestConstants.OPERATION_ERRORS_SIZE, equalTo(0))
                 .body(IntegrationTestConstants.OPERATION_REQUEST_TIMESTAMP, notNullValue());
     }
 
@@ -48,7 +50,7 @@ public class GetSeatTest {
         RestAssured.given().when().header("Accept-Language", "invalid123")
                 .pathParam(PATH_PARAM_EVENT_ID, IntegrationTestConstants.EVENT_ID)
                 .get(IntegrationTestConstants.COUNT_END_POINT).then().statusCode(HttpStatus.SC_BAD_REQUEST)
-                .body(IntegrationTestConstants.OPERATION_RESULT, equalTo("ERROR"))
+                .body(IntegrationTestConstants.OPERATION_RESULT, equalTo(String.valueOf(Result.ERROR)))
                 .body(IntegrationTestConstants.OPERATION_CORRELATION_ID, notNullValue())
                 .body(IntegrationTestConstants.OPERATION_ERRORS_ERROR_CODE, equalTo("acceptLanguageHeaderInvalid"))
                 .body(IntegrationTestConstants.OPERATION_ERRORS_ERROR_MESSAGE,
@@ -62,7 +64,7 @@ public class GetSeatTest {
         // MethodArgumentTypeMismatchException. expected Long type but passed in value is String.
         RestAssured.given().when().pathParam(PATH_PARAM_EVENT_ID, "invalidEventId")
                 .get(IntegrationTestConstants.COUNT_END_POINT).then().statusCode(HttpStatus.SC_BAD_REQUEST)
-                .body(IntegrationTestConstants.OPERATION_RESULT, equalTo("ERROR"))
+                .body(IntegrationTestConstants.OPERATION_RESULT, equalTo(String.valueOf(Result.ERROR)))
                 .body(IntegrationTestConstants.OPERATION_CORRELATION_ID, notNullValue())
                 .body(IntegrationTestConstants.OPERATION_ERRORS_ERROR_CODE, equalTo("pathParameterInvalid"))
                 .body(IntegrationTestConstants.OPERATION_ERRORS_ERROR_MESSAGE,

@@ -8,6 +8,7 @@ spring:
     username: ticketmaster
     password: ticketmaster
     driver-class-name: org.h2.Driver
+    data: sql/data.sql
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:

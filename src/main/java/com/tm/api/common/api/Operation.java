@@ -3,12 +3,13 @@ package com.tm.api.common.api;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.time.Instant;
-import java.util.Collections;
 import java.util.List;
 
+/**
+ * Operation Object (uses the builder pattern)
+ */
 @JsonDeserialize(builder = Operation.ApiOperationBuilder.class)
 public class Operation {
-
     private String result;
     private String correlationId;
     private List<Error> errors;
@@ -21,11 +22,6 @@ public class Operation {
         this.requestTimeStampUtc = null != apiOperationBuilder.builderRequestInstant ?
                 apiOperationBuilder.builderRequestInstant.toString() :
                 Instant.now().toString();
-    }
-
-    public static Operation getSuccessOperation(String traceId, final Long startInstant) {
-        return new ApiOperationBuilder().result(Result.OK).correlationId(traceId).errors(Collections.emptyList())
-                .requestInstant(Instant.ofEpochMilli(startInstant).toString()).build();
     }
 
     public String getResult() {
@@ -74,5 +70,4 @@ public class Operation {
             return new Operation(this);
         }
     }
-
 }

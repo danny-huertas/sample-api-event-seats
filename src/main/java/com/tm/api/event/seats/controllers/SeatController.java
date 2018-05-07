@@ -1,6 +1,7 @@
 package com.tm.api.event.seats.controllers;
 
 import com.tm.api.common.api.Operation;
+import com.tm.api.common.api.Result;
 import com.tm.api.event.seats.configuration.SpringRootConfig;
 import com.tm.api.event.seats.controllers.model.SeatResponseDto;
 import com.tm.api.event.seats.domain.Seat;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.time.Instant;
+import java.util.Collections;
 
 @Controller
 @RequestMapping(SpringRootConfig.REQUEST_MAPPING)
@@ -54,8 +58,10 @@ public class SeatController {
                 new Seat.SeatBuilder().eventId(eventId).isAvailable(isAvailable).isAisle(isAisle).seatType(type)
                         .build());
 
-        return new SeatResponseDto.SeatResponseDtoBuilder().setSeatCount(seatCount).setOperation(Operation
-                .getSuccessOperation(tracer.getCurrentSpan().traceIdString(), tracer.getCurrentSpan().getBegin()))
+        return new SeatResponseDto.SeatResponseDtoBuilder().setSeatCount(seatCount).setOperation(
+                new Operation.ApiOperationBuilder().result(Result.OK)
+                        .correlationId(tracer.getCurrentSpan().traceIdString()).errors(Collections.emptyList())
+                        .requestInstant(Instant.ofEpochMilli(tracer.getCurrentSpan().getBegin()).toString()).build())
                 .build();
     }
 }

@@ -1,10 +1,9 @@
 package com.tm.api.common.api;
 
 /**
- * This is a wrapper class to retain the JSON root structure 'operation'
+ * This is a wrapper class is used to retain the JSON root structure 'operation'
  */
 public class OperationError {
-
     private Operation operation;
 
     public OperationError(Operation operation) {

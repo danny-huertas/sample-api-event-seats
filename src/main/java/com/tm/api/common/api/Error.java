@@ -1,5 +1,8 @@
 package com.tm.api.common.api;
 
+/**
+ * Error Object (uses the builder pattern)
+ */
 public class Error {
     private String errorCode;
     private String errorMessage;
@@ -36,7 +39,6 @@ public class Error {
     }
 
     public static class ApiErrorBuilder {
-
         private String builderErrorCode;
         private String builderErrorMessage;
         private String builderMoreInfo;

@@ -12,9 +12,9 @@ import java.time.Instant;
 import java.util.Locale;
 
 /**
- * This class defines a bunch of helper methods that can be used in the application request interceptors to achieve the
+ * This class defines  helper methods that can be used in the application request interceptors to achieve the
  * desired business logic. Every request interceptor implementation is expected to define its own business logic
- * behaviour, e.g. within the preHandle method. The implementations of the business logic methods are expected to make
+ * behaviour, e.g. within the preHandle method. The implementations of the business logic methods is expected to make
  * use of the helper methods from this class.
  */
 class RequestInterceptorUtils {

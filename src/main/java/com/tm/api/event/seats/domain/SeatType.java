@@ -2,6 +2,9 @@ package com.tm.api.event.seats.domain;
 
 import java.util.Arrays;
 
+/**
+ * This enum class is used to return a seat type
+ */
 public enum SeatType {
     ADULT("adult"),
     CHILD("child");

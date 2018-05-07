@@ -45,12 +45,15 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class is for exception handling in the seats application
+ */
 @ControllerAdvice
 public class ExceptionHandling {
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandling.class);
-    private static final String EMPTY_FIELD_INFO = "";
     private static final String CRITICAL_ERROR = "criticalError";
     private static final String START_TIME = "startTime";
+    private static final String EMPTY_FIELD_INFO = "";
     private MessageHandler messageHandler;
     private ErrorHelper errorHelper;
     private Tracer tracer;
@@ -62,6 +65,11 @@ public class ExceptionHandling {
         this.tracer = tracer;
     }
 
+    /**
+     * Handles an unsupported media type exception.
+     *
+     * @param ex exception to be handled
+     */
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(value = { InvalidMediaTypeException.class, HttpMediaTypeNotSupportedException.class })
     public void handleUnsupportedMediaTypeException(Exception ex) {
@@ -72,6 +80,11 @@ public class ExceptionHandling {
         LOGGER.error("Unsupported or invalid media type exception occurred ", ex);
     }
 
+    /**
+     * Handles a bad request exception.
+     *
+     * @param ex exception to be handled
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = { MissingServletRequestParameterException.class, ServletRequestBindingException.class,
             MissingServletRequestPartException.class, BindException.class })
@@ -83,6 +96,11 @@ public class ExceptionHandling {
         LOGGER.error("Request parameter binding exception occurred ", ex);
     }
 
+    /**
+     * Handles a method not allowed exception.
+     *
+     * @param ex exception to be handled
+     */
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     public void handleMethodNotAllowedException(HttpRequestMethodNotSupportedException ex) {
@@ -93,6 +111,11 @@ public class ExceptionHandling {
         LOGGER.error("Unsupported request method exception occurred ", ex);
     }
 
+    /**
+     * Handles an internal server exception.
+     *
+     * @param ex exception to be handled
+     */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = { MissingPathVariableException.class, ConversionNotSupportedException.class,
             HttpMessageNotWritableException.class })
@@ -105,10 +128,9 @@ public class ExceptionHandling {
     }
 
     /**
-     * Handles an exception that is thrown when requested url mapping is not
-     * found.
+     * Handles an exception that is thrown when the requested url mapping is not found.
      *
-     * @param ex Exception
+     * @param ex exception to be handled
      */
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = { NoHandlerFoundException.class })
@@ -120,6 +142,11 @@ public class ExceptionHandling {
         LOGGER.error("Handler exception occurred ", ex);
     }
 
+    /**
+     * Handles an exception that is thrown when the media type is not acceptable
+     *
+     * @param ex exception to be handled
+     */
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     @ExceptionHandler(value = HttpMediaTypeNotAcceptableException.class)
     public void handleMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException ex) {
@@ -131,6 +158,8 @@ public class ExceptionHandling {
     }
 
     /**
+     * Handles a global exception
+     *
      * @param request original request received
      * @param ex exception to be handled
      * @return error response body.
@@ -152,6 +181,8 @@ public class ExceptionHandling {
     }
 
     /**
+     * Handles a sql exception
+     *
      * @param request original request received
      * @param ex exception to be handled
      * @return error response body.
@@ -175,6 +206,8 @@ public class ExceptionHandling {
     }
 
     /**
+     * Handles an invalid data format exception
+     *
      * @param request original request received
      * @param ex exception to be handled
      * @return error response body.
@@ -191,6 +224,8 @@ public class ExceptionHandling {
     }
 
     /**
+     * Handles an invalid accept language exception
+     *
      * @param request original request received
      * @return error response body.
      */
@@ -211,7 +246,10 @@ public class ExceptionHandling {
     }
 
     /**
-     * Handles {@link HttpMessageNotReadableException}.
+     * Handles a data type mismatch exception
+     *
+     * @param request original request received
+     * @return error response body.
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
@@ -226,8 +264,7 @@ public class ExceptionHandling {
     }
 
     /**
-     * Used to send the Error Response for the Body Validation validated
-     * using @Valid annotation.
+     * Used to send the Error Response for the Body Validation validated using @Valid annotation.
      *
      * @param ex exception to be handled
      * @return error response body.
@@ -239,6 +276,11 @@ public class ExceptionHandling {
         return handleMethodArgumentNotValidException(tracer.getCurrentSpan().traceIdString(), ex);
     }
 
+    /**
+     * Handles a date time param not valid exception
+     *
+     * @return error response body.
+     */
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(InvalidQueryParamException.class)
     @ResponseBody
@@ -262,6 +304,12 @@ public class ExceptionHandling {
         final List<String> validationErrors = ex.getBindingResult().getAllErrors().stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
 
+        /*
+         * Note: There is no exception Logging here, since when this exception
+         * occurs as the stack trace gets printed, it also prints the sensitive
+         * information in some cases. The error code is enough in resolving the
+         * issue in all the cases, so no need to Log the exception.
+         */
         return errorHelper.errorResponse(validationErrors, traceId);
     }
 }

@@ -1,7 +1,7 @@
 package com.tm.api.event.seats.domain;
 
 /**
- * Request and response object for event.
+ * Domain object for a seat.
  */
 public class Seat {
     private Long id;

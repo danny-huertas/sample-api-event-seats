@@ -5,9 +5,11 @@ import com.tm.api.event.seats.resource.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class is used to interact with the db for the SeatEntity
+ */
 @Component
 public class SeatDao {
-
     private SeatRepository seatRepository;
 
     @Autowired
@@ -16,10 +18,10 @@ public class SeatDao {
     }
 
     /**
-     * Get all Seat for a given Event that started after startTime and
-     * finished before finishedTime.
+     * Retrieves seat count based on search criteria for a given event.
      *
-     * @return A page of Seat matching the criteria.
+     * @param seat domain object for a seat
+     * @return Returns the count of seats that match the given search criteria within a given event.
      */
     public Long getSeatCount(Seat seat) {
         return seatRepository.count(new SeatEntitySpecification(seat));

@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * Entity object for a seat.
+ */
 @Entity
 @Table(name = "seat")
 public class SeatEntity implements Serializable {

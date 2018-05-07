@@ -284,8 +284,8 @@ public class ExceptionHandling {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(InvalidQueryParamException.class)
     @ResponseBody
-    public OperationError handleDateTimeParamNotValidException(final InvalidQueryParamException ex) {
-        LOGGER.error("Error occurred while parsing request parameters.", ex);
+    public OperationError handleQueryParamNotValidException(final InvalidQueryParamException ex) {
+        LOGGER.error("Error occurred while parsing query parameters.", ex);
         return errorHelper
                 .errorResponse(ErrorConstants.ERROR_QUERY_PARAMETER_INVALID, tracer.getCurrentSpan().traceIdString(),
                         messageHandler.localizeMessage(ErrorConstants.ERROR_QUERY_PARAMETER_INVALID), ex.getMessage(),

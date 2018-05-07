@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: dhuertas
+      changes:
+        - createTable:
+            tableName: event
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    - primaryKey: true
+                    - nullable: false
+        - createTable:
+            tableName: seat
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: event_id
+                  type: bigint
+                  constraints:
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: available
+                  type: bit(1)
+              - column:
+                  name: aisle
+                  type: bit(1)
+              - column:
+                  name: type
+                  type: varchar(16)

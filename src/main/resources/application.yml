@@ -1,0 +1,41 @@
+info:
+  component: Event Seats Service
+
+spring:
+  datasource:
+  # To access in memory DB for debug purpose, change "mem" to "file" in local machine.
+    url: jdbc:h2:mem:~/ticketmaster;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: ticketmaster
+    password: ticketmaster
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    database: H2
+
+liquibase:
+  drop-first: false
+  url: ${spring.datasource.url}
+  user: ${spring.datasource.username}
+  password: ${spring.datasource.password}
+
+server:
+  port: ${port:3020}
+
+logging:
+  file: ${spring.application.name}.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [AppName=${spring.application.name}] [trace=%X{X-B3-TraceId:-}, span=%X{X-B3-SpanId:-}] [LogMessage=%m]%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [AppName=${spring.application.name}] [trace=%X{X-B3-TraceId:-}, span=%X{X-B3-SpanId:-}] [LogMessage=%m]%n"
+  level:
+    root: INFO
+
+root:
+  config:
+    title: Spring Boot REST API
+    description: Spring Boot REST API for Event Seats
+    version: 1.0.0
+    contactName: Danny Huertas
+    contactUrl: https://www.linkedin.com/in/danny-huertas-6055688
+    contactEmail: dannyhue@gmail.com

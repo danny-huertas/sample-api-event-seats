@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:9797
+      fail-fast: true
+      retry:
+        max-attempts: 5
+      enabled: false
+      discovery:
+        enabled: false
+  application:
+    name: tm-api-event-seats
+
+eureka:
+  client:
+    enabled: false

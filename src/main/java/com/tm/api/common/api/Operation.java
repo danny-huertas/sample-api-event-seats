@@ -40,6 +40,9 @@ public class Operation {
         return requestTimeStampUtc;
     }
 
+    /**
+     * ApiOperationBuilder Object
+     */
     public static class ApiOperationBuilder {
         private Result builderResult;
         private String builderCorrelationId;

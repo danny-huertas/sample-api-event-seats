@@ -2,6 +2,9 @@ package com.tm.api.event.seats.controllers.model;
 
 import com.tm.api.common.api.Operation;
 
+/**
+ * SeatResponseDto Object
+ */
 public class SeatResponseDto {
     private Long seatCount;
     private Operation operation;

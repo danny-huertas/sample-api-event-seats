@@ -34,7 +34,7 @@ logging:
 
 root:
   config:
-    title: Spring Boot REST API
+    title: Spring Boot Event Seats REST API
     description: Spring Boot REST API for Event Seats
     version: 1.0.0
     contactName: Danny Huertas

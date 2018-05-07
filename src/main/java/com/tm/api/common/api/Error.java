@@ -38,6 +38,9 @@ public class Error {
         this.moreInfo = moreInfo;
     }
 
+    /**
+     * ApiErrorBuilder Object
+     */
     public static class ApiErrorBuilder {
         private String builderErrorCode;
         private String builderErrorMessage;

@@ -1,6 +1,5 @@
 package com.tm.api.event.seats.configuration;
 
-import static springfox.documentation.builders.PathSelectors.regex;
 import com.tm.api.common.localization.SmartLocaleResolver;
 import com.tm.api.event.seats.controllers.SeatController;
 import com.tm.api.event.seats.interceptor.RequestInterceptor;
@@ -19,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -26,6 +26,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * This class is used to configure the event seats application
+ */
 @Configuration
 @EnableWebMvc
 @EnableSwagger2
@@ -87,40 +90,55 @@ public class SpringRootConfig extends WebMvcConfigurerAdapter {
         this.contactEmail = contactEmail;
     }
 
-    @Bean
-    ServletRegistrationBean h2servletRegistration() {
-        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
-        registrationBean.addUrlMappings("/console/*");
-        return registrationBean;
-    }
-
-    @Bean
-    public Docket seatsApi() {
-        return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.basePackage(SeatController.class.getPackage().getName()))
-                .paths(regex(REQUEST_MAPPING + ".*")).build().apiInfo(metaData());
-    }
-
-    private ApiInfo metaData() {
-        return new ApiInfoBuilder().title(title).description(description).version(version)
-                .contact(new Contact(contactName, contactUrl, contactEmail)).build();
-    }
-
+    /**
+     * Sets sampler that traces each action
+     *
+     * @return action tracer
+     */
     @Bean
     public AlwaysSampler defaultSampler() {
         return new AlwaysSampler();
     }
 
-    @Override
-    public void addInterceptors(final InterceptorRegistry registry) {
-        registry.addInterceptor(new RequestInterceptor()).addPathPatterns(REQUEST_MAPPING + "/**");
-    }
-
+    /**
+     * Sets a locale resolver that allows for both locale resolution via the request and locale modification via request and response.
+     *
+     * @return Servlet locale resolver
+     */
     @Bean
     public LocaleResolver localeResolver() {
         return new SmartLocaleResolver();
     }
 
+    /**
+     * Sets a servlet but with a Spring Bean friendly design. This is needed for the H2 console.
+     *
+     * @return Spring Bean friendly servlet
+     */
+    @Bean
+    ServletRegistrationBean h2ServletRegistration() {
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
+        registrationBean.addUrlMappings("/console/*");
+        return registrationBean;
+    }
+
+    /**
+     * Sets the primary interface into the Springfox framework.  This is needed for swagger documentation
+     *
+     * @return Springfox Docket
+     */
+    @Bean
+    public Docket seatsApi() {
+        return new Docket(DocumentationType.SWAGGER_2).select()
+                .apis(RequestHandlerSelectors.basePackage(SeatController.class.getPackage().getName()))
+                .paths(PathSelectors.regex(REQUEST_MAPPING + ".*")).build().apiInfo(metaData());
+    }
+
+    /**
+     * Sets Central dispatcher for HTTP request
+     *
+     * @return Central dispatcher for HTTP request
+     */
     @Bean
     public DispatcherServlet dispatcherServlet() {
         final DispatcherServlet servlet = new DispatcherServlet();
@@ -130,23 +148,49 @@ public class SpringRootConfig extends WebMvcConfigurerAdapter {
         return servlet;
     }
 
+    /**
+     * Sets the message source used to get resource bundle messages
+     *
+     * @return a resource message source
+     */
     @Bean
     public MessageSource messageSource() {
         final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasenames("classpath:i18n/messages");
-        // If true, the key of the message will be displayed if the key is not
-        // found, instead of throwing an exception
         messageSource.setUseCodeAsDefaultMessage(true);
         messageSource.setDefaultEncoding("UTF-8");
-        // The value 0 means always reload the messages to be developer friendly
         messageSource.setCacheSeconds(0);
         return messageSource;
     }
 
+    /**
+     * Adds interceptors to the registry
+     *
+     * @param registry helps configuring a list of mapped interceptors
+     */
+    @Override
+    public void addInterceptors(final InterceptorRegistry registry) {
+        registry.addInterceptor(new RequestInterceptor()).addPathPatterns(REQUEST_MAPPING + "/**");
+    }
+
+    /**
+     * Adds resource handlers to the registry
+     *
+     * @param registry helps configuring a list of mapped interceptors
+     */
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    /**
+     * Builds the meta data used by the Springfox framework.  This is needed for swagger documentation
+     *
+     * @return Springfox Api Info
+     */
+    private ApiInfo metaData() {
+        return new ApiInfoBuilder().title(title).description(description).version(version)
+                .contact(new Contact(contactName, contactUrl, contactEmail)).build();
+    }
 }

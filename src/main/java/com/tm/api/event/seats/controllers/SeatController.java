@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.time.Instant;
 import java.util.Collections;
 
+/**
+ * REST controller for Event Seats API. (The reference documentation is built with Swagger)
+ */
 @Controller
 @RequestMapping(SpringRootConfig.REQUEST_MAPPING)
 @Api(value = "seats")
@@ -44,7 +47,14 @@ public class SeatController {
     }
 
     /**
-     * Get Event seat for a Event
+     * Retrieves seat count based on search criteria for a given event.
+     * If no search criteria is provided, a count of all event seats is returned.
+     *
+     * @param eventId the event id being used for the search of seats
+     * @param isAvailable filter by available seats. This is an optional parameter.
+     * @param isAisle filter by aisle seats. This is an optional parameter.
+     * @param type filter by the seat type (adult|child). This is an optional parameter.
+     * @return Returns the count of seats that match the given search criteria within a given event.
      */
     @ApiOperation(value = "Event seat count", notes = "Get an event seat count", response = SeatResponseDto.class)
     @RequestMapping(value = "/{eventId}/count", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,10 +64,13 @@ public class SeatController {
             @ApiParam(value = "Filter count on seat availability") @RequestParam(name = "available", required = false) Boolean isAvailable,
             @ApiParam(value = "Filter count on aisle seats") @RequestParam(name = "aisle", required = false) Boolean isAisle,
             @ApiParam(value = "Filter count by type", allowableValues = "adult,child") @RequestParam(name = "type", required = false) String type) {
+
+        //build a seat object and use it to get the count of seats for an event
         Long seatCount = eventService.getSeatCount(
                 new Seat.SeatBuilder().eventId(eventId).isAvailable(isAvailable).isAisle(isAisle).seatType(type)
                         .build());
 
+        //build and return the response dto object
         return new SeatResponseDto.SeatResponseDtoBuilder().setSeatCount(seatCount).setOperation(
                 new Operation.ApiOperationBuilder().result(Result.OK)
                         .correlationId(tracer.getCurrentSpan().traceIdString()).errors(Collections.emptyList())

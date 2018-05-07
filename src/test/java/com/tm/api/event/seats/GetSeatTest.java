@@ -53,6 +53,17 @@ public class GetSeatTest {
     }
 
     @Test
+    public void eventOneInvalidSeatType() {
+        Map<String, Object> requestParams = new LinkedHashMap<>();
+        requestParams.put(IntegrationTestConstants.PARAM_IS_AVAILABLE, true);
+        requestParams.put(IntegrationTestConstants.PARAM_IS_AISLE, false);
+        requestParams.put(IntegrationTestConstants.PARAM_SEAT_TYPE, "child");
+
+        //run assertions
+        //apiAssertions(IntegrationTestConstants.EVENT_ONE_ID, requestParams, 100);
+    }
+
+    @Test
     public void getSeatCountInvalidAcceptLanguage() {
         RestAssured.given().port(port).when().header("Accept-Language", "invalid123")
                 .pathParam(IntegrationTestConstants.PATH_PARAM_EVENT_ID, IntegrationTestConstants.EVENT_ONE_ID)

@@ -6,21 +6,21 @@ package com.tm.api.event.seats.domain;
 public class Seat {
     private Long id;
     private Long eventId;
-    private Boolean isAvailable;
-    private Boolean isAisle;
-    private String seatType;
+    private Boolean available;
+    private Boolean aisle;
+    private SeatType seatType;
 
     private Seat(SeatBuilder seatBuilder) {
         this.id = seatBuilder.builderSeatId;
         this.eventId = seatBuilder.builderEventId;
-        this.isAvailable = seatBuilder.builderIsAvailable;
-        this.isAisle = seatBuilder.builderIsAisle;
-        this.seatType = seatBuilder.builderSeatType;
+        this.available = seatBuilder.builderIsAvailable;
+        this.aisle = seatBuilder.builderIsAisle;
+        this.seatType = SeatType.fromType(seatBuilder.builderSeatType);
     }
 
     @Override
     public String toString() {
-        return "Seat{" + "id=" + id + ", eventId=" + eventId + ", isAvailable=" + isAvailable + ", isAisle=" + isAisle
+        return "Seat{" + "id=" + id + ", eventId=" + eventId + ", available=" + available + ", aisle=" + aisle
                 + ", seatType=" + seatType + '}';
     }
 

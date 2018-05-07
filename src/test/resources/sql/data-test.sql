@@ -1,7 +1,6 @@
 /*Inserts test data into the event / seat tables for the integration tests*/
 INSERT INTO `event`
-  SELECT
-    *
+  SELECT *
   FROM GENERATE_SERIES (1, 5);
 
 INSERT INTO `seat` (id, event_id, available, aisle, type)

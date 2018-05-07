@@ -5,7 +5,6 @@ import com.tm.api.common.error.ErrorConstants;
 import com.tm.api.common.error.ErrorHelper;
 import com.tm.api.common.exception.InvalidAcceptLanguageException;
 import com.tm.api.common.exception.InvalidQueryParamException;
-import com.tm.api.common.http.HttpConstants;
 import com.tm.api.common.localization.MessageHandler;
 import org.hibernate.exception.GenericJDBCException;
 import org.hibernate.exception.JDBCConnectionException;
@@ -48,10 +47,10 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ExceptionHandling {
-
-    private static final String EMPTY_FIELD_INFO = "";
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandling.class);
+    private static final String EMPTY_FIELD_INFO = "";
     private static final String CRITICAL_ERROR = "criticalError";
+    private static final String START_TIME = "startTime";
     private MessageHandler messageHandler;
     private ErrorHelper errorHelper;
     private Tracer tracer;
@@ -149,7 +148,7 @@ public class ExceptionHandling {
         return errorHelper
                 .errorResponse(ErrorConstants.ERROR_CODE_INTERNAL_ERROR, tracer.getCurrentSpan().traceIdString(),
                         messageHandler.localizeMessage(ErrorConstants.ERROR_CODE_INTERNAL_ERROR), EMPTY_FIELD_INFO,
-                        request.getAttribute(HttpConstants.START_TIME));
+                        request.getAttribute(START_TIME));
     }
 
     /**
@@ -172,7 +171,7 @@ public class ExceptionHandling {
         return errorHelper
                 .errorResponse(ErrorConstants.ERROR_CODE_INTERNAL_ERROR, tracer.getCurrentSpan().traceIdString(),
                         messageHandler.localizeMessage(ErrorConstants.ERROR_CODE_INTERNAL_ERROR), EMPTY_FIELD_INFO,
-                        request.getAttribute(HttpConstants.START_TIME));
+                        request.getAttribute(START_TIME));
     }
 
     /**
@@ -188,7 +187,7 @@ public class ExceptionHandling {
         return errorHelper
                 .errorResponse(ErrorConstants.ERROR_CODE_INVALID_PATH_PARAM, tracer.getCurrentSpan().traceIdString(),
                         messageHandler.localizeMessage(ErrorConstants.ERROR_CODE_INVALID_PATH_PARAM), EMPTY_FIELD_INFO,
-                        request.getAttribute(HttpConstants.START_TIME));
+                        request.getAttribute(START_TIME));
     }
 
     /**
@@ -208,7 +207,7 @@ public class ExceptionHandling {
         return errorHelper.errorResponse(ErrorConstants.ERROR_CODE_ACCEPT_LANGUAGE_HEADER_INVALID,
                 tracer.getCurrentSpan().traceIdString(),
                 "Request header Accept-Language is not in the expected format.", EMPTY_FIELD_INFO,
-                request.getAttribute(HttpConstants.START_TIME));
+                request.getAttribute(START_TIME));
     }
 
     /**
@@ -223,7 +222,7 @@ public class ExceptionHandling {
         return errorHelper
                 .errorResponse(ErrorConstants.ERROR_CODE_REQUEST_BODY_INVALID, tracer.getCurrentSpan().traceIdString(),
                         messageHandler.localizeMessage(ErrorConstants.ERROR_CODE_REQUEST_BODY_INVALID),
-                        EMPTY_FIELD_INFO, request.getAttribute(HttpConstants.START_TIME));
+                        EMPTY_FIELD_INFO, request.getAttribute(START_TIME));
     }
 
     /**

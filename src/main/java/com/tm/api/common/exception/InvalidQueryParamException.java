@@ -1,10 +1,10 @@
 package com.tm.api.common.exception;
 
+/**
+ * This Exception is thrown when a query has an invalid param
+ */
 public class InvalidQueryParamException extends RuntimeException {
-    private static final long serialVersionUID = -6561409656922351453L;
-
     public InvalidQueryParamException(String parameterName) {
         super(parameterName);
     }
-
 }

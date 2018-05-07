@@ -1,6 +1,7 @@
 package com.tm.api.event.seats.aspect;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.catalina.connector.RequestFacade;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 
@@ -14,14 +15,13 @@ import java.util.Arrays;
  * output.
  */
 public abstract class LogAspectBase {
-
-    protected static final String LOG_MESSAGE = "(*LOG*)";
-    protected static final String BEFORE_RUNNING_CLASS = " Before running, Interface/Class intercepted is :  ";
-    protected static final String BEFORE_RUNNING_METHOD = " Before running, Method intercepted is : ";
-    protected static final String METHOD_ARGS = " Arguments passed to method : ";
-    protected static final String AFTER_RUNNING_CLASS = " After running, Interface/Class is :  ";
-    protected static final String AFTER_RUNNING_METHOD = " After running, Method is : ";
-    protected static final String AFTER_RETURN_VALUE = " After returning, the return value is : ";
+    private static final String LOG_MESSAGE = "(*LOG*)";
+    private static final String BEFORE_RUNNING_CLASS = " Before running, Interface/Class intercepted is :  ";
+    private static final String BEFORE_RUNNING_METHOD = " Before running, Method intercepted is : ";
+    private static final String METHOD_ARGS = " Arguments passed to method : ";
+    private static final String AFTER_RUNNING_CLASS = " After running, Interface/Class is :  ";
+    private static final String AFTER_RUNNING_METHOD = " After running, Method is : ";
+    private static final String AFTER_RETURN_VALUE = " After returning, the return value is : ";
 
     /**
      * Implementation class must provide the logger
@@ -39,7 +39,7 @@ public abstract class LogAspectBase {
      * @return {@link Object} returned from invoking {@link ProceedingJoinPoint#proceed()}
      * @throws Throwable from {@link ProceedingJoinPoint#proceed()}
      */
-    protected final Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+    Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
         return doAround(joinPoint, joinPoint.getArgs());
     }
 
@@ -52,7 +52,7 @@ public abstract class LogAspectBase {
      * @return {@link Object} returned from invoking {@link ProceedingJoinPoint#proceed()}
      * @throws Throwable from {@link ProceedingJoinPoint#proceed()}
      */
-    protected final Object doAround(ProceedingJoinPoint joinPoint, @NotNull Object[] args) throws Throwable {
+    Object doAround(ProceedingJoinPoint joinPoint, @NotNull Object[] args) throws Throwable {
         final ObjectMapper om = new ObjectMapper();
 
         // log before invoking the target method
@@ -86,7 +86,7 @@ public abstract class LogAspectBase {
      * @return {@link Object} returned from invoking {@link ProceedingJoinPoint#proceed()}
      * @throws Throwable from {@link ProceedingJoinPoint#proceed()}
      */
-    protected final Object doAroundDebug(ProceedingJoinPoint joinPoint, @NotNull Object[] args) throws Throwable {
+    Object doAroundDebug(ProceedingJoinPoint joinPoint, @NotNull Object[] args) throws Throwable {
 
         // log before invoking the target method
         if (getLogger().isDebugEnabled()) {
@@ -118,14 +118,8 @@ public abstract class LogAspectBase {
      * @return {@link Object} returned from invoking {@link ProceedingJoinPoint#proceed()}
      * @throws Throwable from {@link ProceedingJoinPoint#proceed()}
      */
-    protected final Object doAroundError(ProceedingJoinPoint joinPoint, @NotNull Object[] args) throws Throwable {
+    Object doAroundError(ProceedingJoinPoint joinPoint, @NotNull Object[] args) throws Throwable {
         final ObjectMapper om = new ObjectMapper();
-
-        /*
-         * Note: Unlike doAroundDebug, pretty printer is not used here for method arguments as the handler methods
-         * contain HttpServletRequest as an argument. Since this method is used for AOP logging of ExceptionHandling
-         * methods, we get an Unhandled exception when trying to pretty print.
-         */
 
         // log before invoking the target method
         if (getLogger().isErrorEnabled()) {
@@ -153,11 +147,10 @@ public abstract class LogAspectBase {
      * Rewrites the request argument if it is of the given class
      *
      * @param arg the argument to be rewritten, can be null
-     * @param className the class name to checked for
      * @return the given argument or the rewritten argument or null if null was passed as {@code} arg {@code}
      */
-    protected Object rewriteArgument(Object arg, String className) {
-        if ((arg != null) && className.equalsIgnoreCase(arg.getClass().getName())) {
+    Object rewriteArgument(Object arg) {
+        if ((arg != null) && RequestFacade.class.getName().equalsIgnoreCase(arg.getClass().getName())) {
             return "Argument was removed.";
         }
         return arg;

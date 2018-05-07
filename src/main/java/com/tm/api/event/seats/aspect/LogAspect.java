@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
+/**
+ * This class is used to produce consistent log output.
+ */
 @Aspect
 @Component
 public class LogAspect extends LogAspectBase {
@@ -24,9 +26,7 @@ public class LogAspect extends LogAspectBase {
     @Around("execution(* com.tm.api.event.seats.controllers.*.*(..))")
     public Object doAroundController(ProceedingJoinPoint joinPoint) throws Throwable {
         // for Controller the RequestFacade argument is removed from log
-        Object[] args = Arrays.stream(joinPoint.getArgs())
-                .map(arg -> rewriteArgument(arg, "org.apache.catalina.connector.RequestFacade"))
-                .collect(Collectors.toList()).toArray();
+        Object[] args = Arrays.stream(joinPoint.getArgs()).map(arg -> rewriteArgument(arg)).toArray();
         return doAroundDebug(joinPoint, args);
     }
 

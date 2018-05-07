@@ -12,9 +12,12 @@ import java.util.Locale;
  */
 @Component
 public class MessageHandler {
+    private MessageSource messageSource;
 
     @Autowired
-    private MessageSource messageSource;
+    public MessageHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     /**
      * Provides a message for the given message key.

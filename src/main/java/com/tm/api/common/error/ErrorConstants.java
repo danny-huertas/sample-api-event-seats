@@ -1,7 +1,7 @@
 package com.tm.api.common.error;
 
 /**
- * This class is used to hold all the constant properties associated to errors
+ * Constant properties associated to errors
  */
 public class ErrorConstants {
     // Error codes

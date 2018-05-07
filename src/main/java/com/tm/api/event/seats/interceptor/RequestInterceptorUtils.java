@@ -1,7 +1,6 @@
 package com.tm.api.event.seats.interceptor;
 
 import com.tm.api.common.exception.InvalidAcceptLanguageException;
-import com.tm.api.common.http.HttpConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +18,8 @@ import java.util.Locale;
  * use of the helper methods from this class.
  */
 class RequestInterceptorUtils {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestInterceptorUtils.class);
+    private static final String START_TIME = "startTime";
 
     private RequestInterceptorUtils() {
         // Disallow instantiation.
@@ -54,8 +53,8 @@ class RequestInterceptorUtils {
      * @param request the current incoming servlet request
      */
     static void initRequestStartTime(ServletRequest request) {
-        if (request.getAttribute(HttpConstants.START_TIME) == null) {
-            request.setAttribute(HttpConstants.START_TIME, Instant.now().toString());
+        if (request.getAttribute(START_TIME) == null) {
+            request.setAttribute(START_TIME, Instant.now().toString());
         }
     }
 }

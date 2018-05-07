@@ -69,6 +69,7 @@ public class ErrorHelper {
      */
     public OperationError errorResponse(final String errorCode, final String traceId, final String errorMessage,
             final String moreInfo, final Object startTime) {
+        //build and return the operation error object
         return new OperationError(new Operation.ApiOperationBuilder().result(Result.ERROR).correlationId(traceId)
                 .errors(Collections.singletonList(
                         new Error.ApiErrorBuilder().errorCode(errorCode).errorMessage(errorMessage).moreInfo(moreInfo)

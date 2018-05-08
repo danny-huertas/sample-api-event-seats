@@ -59,7 +59,7 @@ public class SeatController {
     @RequestMapping(value = "/{eventId}/count", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public SeatResponseDto getSeatCount(
-            @ApiParam(value = "ID of the event you want the seat count for", required = true) @PathVariable Long eventId,
+            @ApiParam(value = "ID of the event you want the seat count for", allowableValues = "1,2,3,4", required = true) @PathVariable Long eventId,
             @ApiParam(value = "Filter count on seat availability") @RequestParam(name = "available", required = false) Boolean isAvailable,
             @ApiParam(value = "Filter count on aisle seats") @RequestParam(name = "aisle", required = false) Boolean isAisle,
             @ApiParam(value = "Filter count by type", allowableValues = "adult,child") @RequestParam(name = "type", required = false) String type) {

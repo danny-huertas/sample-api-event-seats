@@ -38,3 +38,9 @@ databaseChangeLog:
               - column:
                   name: type
                   type: varchar(16)
+        - sqlFile:
+            dbms: h2
+            encoding: utf8
+            path: sql/data.sql
+            relativeToChangelogFile: true
+            splitStatements: true

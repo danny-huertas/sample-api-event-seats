@@ -7,6 +7,7 @@ public class IntegrationTestConstants {
     public static final Long EVENT_ONE_ID = 1L;
     public static final Long EVENT_TWO_ID = 2L;
     public static final Long EVENT_THREE_ID = 3L;
+    public static final Long EVENT_FOUR_ID = 4L;
     public static final String PARAM_SEAT_TYPE = "type";
     public static final String PARAM_IS_AISLE = "aisle";
     public static final String PARAM_IS_AVAILABLE = "available";

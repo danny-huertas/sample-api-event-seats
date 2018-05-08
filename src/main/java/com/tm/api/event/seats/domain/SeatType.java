@@ -16,7 +16,9 @@ public enum SeatType {
     }
 
     public static SeatType fromType(String type) {
-        return Arrays.stream(values()).filter(value -> type.equalsIgnoreCase(value.type)).findFirst().orElse(null);
+        return type != null ?
+                Arrays.stream(values()).filter(value -> type.equalsIgnoreCase(value.type)).findFirst().orElse(null) :
+                null;
 
     }
 }

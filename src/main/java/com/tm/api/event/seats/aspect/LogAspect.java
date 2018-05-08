@@ -26,7 +26,7 @@ public class LogAspect extends LogAspectBase {
     @Around("execution(* com.tm.api.event.seats.controllers.*.*(..))")
     public Object doAroundController(ProceedingJoinPoint joinPoint) throws Throwable {
         // for Controller the RequestFacade argument is removed from log
-        Object[] args = Arrays.stream(joinPoint.getArgs()).map(arg -> rewriteArgument(arg)).toArray();
+        Object[] args = Arrays.stream(joinPoint.getArgs()).map(this::rewriteArgument).toArray();
         return doAroundDebug(joinPoint, args);
     }
 

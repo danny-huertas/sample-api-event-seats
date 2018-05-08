@@ -40,17 +40,16 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAll() {
+    public void seatCountAllNoFilters() {
         //run assertions
         apiAssertions(TestConstants.EVENT_ONE_ID, new LinkedHashMap<>(), 90);
         apiAssertions(TestConstants.EVENT_TWO_ID, new LinkedHashMap<>(), 130);
         apiAssertions(TestConstants.EVENT_THREE_ID, new LinkedHashMap<>(), 80);
         apiAssertions(TestConstants.EVENT_FOUR_ID, new LinkedHashMap<>(), 0);
-
     }
 
     @Test
-    public void seatCountAllAvailable() {
+    public void seatCountTotalAvailable() {
         requestParams.put(TestConstants.PARAM_IS_AVAILABLE, true);
 
         //run assertions
@@ -61,7 +60,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllNotAvailable() {
+    public void seatCountTotalNotAvailable() {
         requestParams.put(TestConstants.PARAM_IS_AVAILABLE, false);
 
         //run assertions
@@ -72,7 +71,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllAisle() {
+    public void seatCountTotalAisle() {
         requestParams.put(TestConstants.PARAM_IS_AISLE, true);
 
         //run assertions
@@ -83,7 +82,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllNotAisle() {
+    public void seatCountTotalNotAisle() {
         requestParams.put(TestConstants.PARAM_IS_AISLE, false);
 
         //run assertions
@@ -94,7 +93,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllSeatTypeChild() {
+    public void seatCountTotalTypeChild() {
         requestParams.put(TestConstants.PARAM_SEAT_TYPE, TestConstants.SEAT_TYPE_CHILD);
 
         //run assertions
@@ -105,7 +104,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllSeatTypeAdult() {
+    public void seatCountTotalTypeAdult() {
         requestParams.put(TestConstants.PARAM_SEAT_TYPE, TestConstants.SEAT_TYPE_ADULT);
 
         //run assertions
@@ -116,7 +115,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllInvalidSeatType() {
+    public void seatCountTotalInvalidType() {
         requestParams.put(TestConstants.PARAM_SEAT_TYPE, "invalid seat type");
 
         // IllegalStateException: Unsupported type doesnt exist.
@@ -132,7 +131,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountInvalidEventId() {
+    public void seatCountTotalInvalidEventId() {
         // MethodArgumentTypeMismatchException. expected Long type but passed in value is String.
         RestAssured.given().port(port).when().pathParam(TestConstants.PATH_PARAM_EVENT_ID, "invalidEventId")
                 .get(TestConstants.COUNT_END_POINT).then().statusCode(HttpStatus.SC_BAD_REQUEST)
@@ -146,7 +145,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllSeatTypeAdultAndNotAisle() {
+    public void seatCountTotalTypeAdultAndNotAisle() {
         requestParams.put(TestConstants.PARAM_IS_AISLE, false);
         requestParams.put(TestConstants.PARAM_SEAT_TYPE, TestConstants.SEAT_TYPE_ADULT);
 
@@ -158,7 +157,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllSeatTypeAdultAndAisle() {
+    public void seatCountTotalTypeAdultAndAisle() {
         requestParams.put(TestConstants.PARAM_IS_AISLE, true);
         requestParams.put(TestConstants.PARAM_SEAT_TYPE, TestConstants.SEAT_TYPE_ADULT);
 
@@ -170,7 +169,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllSeatTypeChildAndNotAisle() {
+    public void seatCountTotalTypeChildAndNotAisle() {
         requestParams.put(TestConstants.PARAM_IS_AISLE, false);
         requestParams.put(TestConstants.PARAM_SEAT_TYPE, TestConstants.SEAT_TYPE_CHILD);
 
@@ -182,7 +181,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllSeatTypeChildAndAisle() {
+    public void seatCountTotalTypeChildAndAisle() {
         requestParams.put(TestConstants.PARAM_IS_AISLE, true);
         requestParams.put(TestConstants.PARAM_SEAT_TYPE, TestConstants.SEAT_TYPE_CHILD);
 
@@ -194,7 +193,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountInvalidAcceptLanguage() {
+    public void seatCountTotalInvalidAcceptLanguage() {
         RestAssured.given().port(port).when().header("Accept-Language", "invalid header")
                 .pathParam(TestConstants.PATH_PARAM_EVENT_ID, TestConstants.EVENT_ONE_ID)
                 .get(TestConstants.COUNT_END_POINT).then().statusCode(HttpStatus.SC_BAD_REQUEST)
@@ -208,7 +207,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountMethodNotAllowed() {
+    public void seatCountTotalMethodNotAllowed() {
         // Request method 'PATCH' not supported
         RestAssured.given().port(port).when().pathParam(TestConstants.PATH_PARAM_EVENT_ID, TestConstants.EVENT_ONE_ID)
                 .patch(TestConstants.COUNT_END_POINT).then().statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);

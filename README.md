@@ -1,8 +1,6 @@
 # Spring Boot Event Seats REST API
 
-### This application is an assessment project demonstrating how to build a REST API using SpringBoot.
-
-The REST API can return the to return the following.
+### This application is an assessment project for REST API that can return the following
 * Total count of seats available for a given event.
 * Seat count based on seats available for a given event.
 * Seat count based on type for a given event.
@@ -31,7 +29,7 @@ To explore and invoke the REST endpoints go to http://localhost:3020/swagger-ui.
 The databases is built using liquibase.  It's also loaded with 4 event id's (1, 2, 3 and 4).  Each event contains a different amount of seats. 
 To view the database console go to http://localhost:3020/console/login.jsp.  From the console, you can run queries to view / modify data.  
 
-#####The database connection info is:
+#### The database connection info:
 * JDBC URL: jdbc:h2:mem:~/ticketmaster;
 * User Name: ticketmaster
 * Password: ticketmaster

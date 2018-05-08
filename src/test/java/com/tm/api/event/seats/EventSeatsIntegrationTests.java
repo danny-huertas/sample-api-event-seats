@@ -40,7 +40,7 @@ public class EventSeatsIntegrationTests {
     }
 
     @Test
-    public void seatCountAllNoFilters() {
+    public void seatCountTotalNoFilters() {
         //run assertions
         apiAssertions(TestConstants.EVENT_ONE_ID, new LinkedHashMap<>(), 90);
         apiAssertions(TestConstants.EVENT_TWO_ID, new LinkedHashMap<>(), 130);

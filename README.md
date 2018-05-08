@@ -35,6 +35,9 @@ To view the database console go to http://localhost:3020/console/login.jsp.  Fro
 * Password: ticketmaster
 * Driver Class: org.h2.Driver
 
+#### Message Locale
+The message locale defaults to US.  All the US messages in the resource bundle are used for errors.
+
 #### Dsl Seed Job
 The dsl seed can be ran on a Jenkins server to create build / deploy jobs for this API.  The deploy jobs can create snapshot as well as release artifacts for this API.
 

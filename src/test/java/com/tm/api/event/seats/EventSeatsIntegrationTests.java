@@ -3,7 +3,7 @@ package com.tm.api.event.seats;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import com.tm.api.EventSeatsApplication;
-import com.tm.api.common.api.Result;
+import com.tm.api.common.operation.Result;
 import com.tm.api.event.seats.configuration.SpringRootConfig;
 import com.tm.api.event.seats.constants.TestConstants;
 import io.restassured.RestAssured;

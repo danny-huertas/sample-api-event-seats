@@ -1,10 +1,10 @@
 package com.tm.api.common.error;
 
-import com.tm.api.common.api.Error;
-import com.tm.api.common.api.Operation;
-import com.tm.api.common.api.OperationError;
-import com.tm.api.common.api.Result;
 import com.tm.api.common.localization.MessageHandler;
+import com.tm.api.common.operation.Error;
+import com.tm.api.common.operation.Operation;
+import com.tm.api.common.operation.OperationError;
+import com.tm.api.common.operation.Result;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

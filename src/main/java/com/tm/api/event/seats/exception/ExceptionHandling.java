@@ -1,11 +1,11 @@
 package com.tm.api.event.seats.exception;
 
-import com.tm.api.common.api.OperationError;
 import com.tm.api.common.error.ErrorConstants;
 import com.tm.api.common.error.ErrorHelper;
 import com.tm.api.common.exception.InvalidAcceptLanguageException;
 import com.tm.api.common.exception.InvalidQueryParamException;
 import com.tm.api.common.localization.MessageHandler;
+import com.tm.api.common.operation.OperationError;
 import org.hibernate.exception.GenericJDBCException;
 import org.hibernate.exception.JDBCConnectionException;
 import org.slf4j.Logger;

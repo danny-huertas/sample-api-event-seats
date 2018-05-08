@@ -1,7 +1,7 @@
 package com.tm.api.event.seats.controllers;
 
-import com.tm.api.common.api.Operation;
-import com.tm.api.common.api.Result;
+import com.tm.api.common.operation.Operation;
+import com.tm.api.common.operation.Result;
 import com.tm.api.event.seats.configuration.SpringRootConfig;
 import com.tm.api.event.seats.controllers.model.SeatResponseDto;
 import com.tm.api.event.seats.domain.Seat;

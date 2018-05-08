@@ -1,6 +1,6 @@
 package com.tm.api.event.seats.controllers.model;
 
-import com.tm.api.common.api.Operation;
+import com.tm.api.common.operation.Operation;
 
 /**
  * SeatResponseDto Object

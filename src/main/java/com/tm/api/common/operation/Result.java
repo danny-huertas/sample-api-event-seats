@@ -1,4 +1,4 @@
-package com.tm.api.common.api;
+package com.tm.api.common.operation;
 
 /**
  * This enum class is used to return the result status

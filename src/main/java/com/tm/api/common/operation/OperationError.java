@@ -1,4 +1,4 @@
-package com.tm.api.common.api;
+package com.tm.api.common.operation;
 
 /**
  * This is a wrapper class is used to retain the JSON root structure 'operation'

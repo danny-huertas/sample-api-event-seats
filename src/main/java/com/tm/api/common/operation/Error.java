@@ -1,4 +1,4 @@
-package com.tm.api.common.api;
+package com.tm.api.common.operation;
 
 /**
  * Error Object (uses the builder pattern)

@@ -15,7 +15,7 @@ public class Seat {
         this.eventId = seatBuilder.builderEventId;
         this.available = seatBuilder.builderIsAvailable;
         this.aisle = seatBuilder.builderIsAisle;
-        this.seatType = SeatType.fromType(seatBuilder.builderSeatType);
+        this.seatType = SeatType.get(seatBuilder.builderSeatType);
     }
 
     @Override

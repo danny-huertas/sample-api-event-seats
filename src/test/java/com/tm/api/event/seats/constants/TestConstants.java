@@ -3,11 +3,13 @@ package com.tm.api.event.seats.constants;
 /**
  * This cass is used to store constants used by integration tests
  */
-public class IntegrationTestConstants {
+public class TestConstants {
     public static final Long EVENT_ONE_ID = 1L;
     public static final Long EVENT_TWO_ID = 2L;
     public static final Long EVENT_THREE_ID = 3L;
     public static final Long EVENT_FOUR_ID = 4L;
+    public static final String SEAT_TYPE_CHILD = "child";
+    public static final String SEAT_TYPE_ADULT = "adult";
     public static final String PARAM_SEAT_TYPE = "type";
     public static final String PARAM_IS_AISLE = "aisle";
     public static final String PARAM_IS_AVAILABLE = "available";
@@ -22,7 +24,7 @@ public class IntegrationTestConstants {
     public static final String OPERATION_ERRORS_MORE_INFO = "operation.errors[0].moreInfo";
     public static final String OPERATION_REQUEST_TIMESTAMP = "operation.requestTimeStampUtc";
 
-    private IntegrationTestConstants() {
+    private TestConstants() {
         // Disallow instantiation
     }
 }

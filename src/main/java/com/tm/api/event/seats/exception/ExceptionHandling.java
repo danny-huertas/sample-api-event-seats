@@ -224,6 +224,24 @@ public class ExceptionHandling {
     }
 
     /**
+     * Handles an invalid data format exception
+     *
+     * @param request original request received
+     * @param ex exception to be handled
+     * @return error response body.
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = { IllegalStateException.class })
+    @ResponseBody
+    public OperationError handleInvalidDataValueException(final HttpServletRequest request, final Exception ex) {
+        LOGGER.error("IllegalStateException occurred ", ex);
+        return errorHelper
+                .errorResponse(ErrorConstants.ERROR_CODE_INVALID_REQUEST_PARAM, tracer.getCurrentSpan().traceIdString(),
+                        messageHandler.localizeMessage(ErrorConstants.ERROR_CODE_INVALID_REQUEST_PARAM),
+                        EMPTY_FIELD_INFO, request.getAttribute(START_TIME));
+    }
+
+    /**
      * Handles an invalid accept language exception
      *
      * @param request original request received

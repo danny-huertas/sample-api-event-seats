@@ -6,19 +6,19 @@ import java.util.Arrays;
  * This enum class is used to return a seat type
  */
 public enum SeatType {
-    ADULT("adult"),
-    CHILD("child");
+    ADULT,
+    CHILD;
 
-    private String type;
-
-    SeatType(String type) {
-        this.type = type;
-    }
-
-    public static SeatType fromType(String type) {
-        return type != null ?
-                Arrays.stream(values()).filter(value -> type.equalsIgnoreCase(value.type)).findFirst().orElse(null) :
+    /**
+     * Uses a passed in value to get a seat type
+     *
+     * @param val seat type as a string
+     * @return seat type object
+     */
+    public static SeatType get(String val) {
+        return val != null ?
+                Arrays.stream(values()).filter(e -> e.name().equalsIgnoreCase(val)).findFirst()
+                        .orElseThrow(() -> new IllegalStateException(String.format("Unsupported type %s.", val))) :
                 null;
-
     }
 }

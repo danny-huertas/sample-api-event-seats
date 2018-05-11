@@ -38,6 +38,9 @@ To view the database console go to http://localhost:3020/console/login.jsp.  Fro
 #### Message Locale
 The message locale defaults to US.  All the US messages in the resource bundle are used for errors.
 
+#### Sonarqube
+Sonarqube is used to run continuous inspection of code quality, detect bugs, code smells and security.
+
 #### Dsl Seed Job
 The dsl seed can be ran on a Jenkins server to create build / deploy jobs for this API.  The deploy jobs can create snapshot as well as release artifacts for this API.
 

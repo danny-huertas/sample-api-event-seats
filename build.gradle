@@ -79,9 +79,9 @@ sonarqube {
 
 liquibase {
     def liquibaseChangeLog = project.findProperty('liquibaseChangeLog') ?: '/db/changelog/db.changelog-master.yaml'
-    def liquibaseUrl = project.findProperty('liquibaseUrl') ?: 'jdbc:h2:mem:~/ticketmaster;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
-    def liquibaseUsername = project.findProperty('liquibaseUsername') ?: 'ticketmaster'
-    def liquibasePassword = project.findProperty('liquibasePassword') ?: 'ticketmaster'
+    def liquibaseUrl = project.findProperty('liquibaseUrl') ?: 'jdbc:h2:mem:~/sample;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
+    def liquibaseUsername = project.findProperty('liquibaseUsername') ?: 'sample'
+    def liquibasePassword = project.findProperty('liquibasePassword') ?: 'sample'
     def liquibaseOutputFile = project.findProperty('liquibaseOutputFile') ?: 'liquibaseOuptput.sql'
     activities {
         main {

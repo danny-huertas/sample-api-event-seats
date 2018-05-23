@@ -4,9 +4,9 @@ info:
 spring:
   datasource:
   # To access in memory DB for debug purpose, change "mem" to "file" in local machine.
-    url: jdbc:h2:mem:~/ticketmaster;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: ticketmaster
-    password: ticketmaster
+    url: jdbc:h2:mem:~/sample;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sample
+    password: sample
     driver-class-name: org.h2.Driver
     data: sql/data.sql
   jpa:

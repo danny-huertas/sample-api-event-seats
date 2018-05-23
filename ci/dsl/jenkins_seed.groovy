@@ -4,11 +4,11 @@ import hudson.*
 import hudson.model.*
 
 // Each jenkins_seed will only differ by a a few variables
-def component_name="tm-api-event-seats"
-def component_org="com.tm.api"
+def component_name="sample-api-event-seats"
+def component_org="com.sample.api"
 def github_repo_url = "https://github.com/danny-huertas/${component_name}"
 def github_repo_ssh_uri = "git@github.com:danny-huertas/${component_name}.git"
-def github_build_tools_url = "https://github.org/danny-huertas/tm-api-build-tools"
+def github_build_tools_url = "https://github.org/danny-huertas/sample-api-build-tools"
 def github_ssh_cred = "d498e5d9-f7a3-4550-933c-395297b74606"
 def application_port = "3020"
 
@@ -16,7 +16,7 @@ def application_port = "3020"
 def artifactory_user_var = "repo_user"
 def artifactory_password_var = "repo_password"
 def artifactory_cred = "ac152582-4330-4b3d-b657-45da87598bbe"
-def artifactory_virtual_repo = "tm-virtual"
+def artifactory_virtual_repo = "sample-virtual"
 
 def sonar_cred = "6c291877-597c-433e-963b-7bfd71db4d62"
 
@@ -388,20 +388,20 @@ freeStyleJob("${jenkins_build_path}/${org_name_upper}/${deploy_job_name}") {
                         '\n' +
                         'if [[ "${env}" = "dev" ]]; then\n' +
                         'echo "deploying to DI"\n' +
-                        'SERVER_DEV=dev-tm-all.westus.com\n' +
+                        'SERVER_DEV=dev-sample-all.westus.com\n' +
                         'scp -oStrictHostKeyChecking=no -i ${di_keyfile} $WORKSPACE_DEPLOY_SCRIPT ${di_username}@$SERVER_DEV:/tmp/${REMOTE_SCRIPT}\n' +
                         'scp -oStrictHostKeyChecking=no -i ${di_keyfile} $WORKSPACE_TEMPLATE_SERVICE ${di_username}@$SERVER_DEV:/tmp/template.service\n' +
                         'ssh -oStrictHostKeyChecking=no -i ${di_keyfile} -tt ${di_username}@$SERVER_DEV sudo su -c "\'chmod +x /tmp/${REMOTE_SCRIPT}; cd /tmp; ./${REMOTE_SCRIPT}\'" || exit 1\n' +
                         'fi\n' +
                         'if [[ "${env}" = "qa" ]]; then\n' +
                         'echo "deploying to QA1"\n' +
-                        'SERVER_QA1=qa-tm-all1.westus.com\n' +
+                        'SERVER_QA1=qa-sample-all1.westus.com\n' +
                         'scp -oStrictHostKeyChecking=no -i ${qa_keyfile} $WORKSPACE_DEPLOY_SCRIPT ${qa_username}@$SERVER_QA1:/tmp/${REMOTE_SCRIPT}\n' +
                         'scp -oStrictHostKeyChecking=no -i ${qa_keyfile} $WORKSPACE_TEMPLATE_SERVICE ${qa_username}@$SERVER_QA1:/tmp/template.service\n' +
                         'ssh -oStrictHostKeyChecking=no -i ${qa_keyfile} -tt ${qa_username}@$SERVER_QA1 sudo su -c "\'chmod +x /tmp/${REMOTE_SCRIPT}; cd /tmp; ./${REMOTE_SCRIPT}\'" || exit 1\n' +
 
                         'echo "deploying to QA2"\n' +
-                        'SERVER_QA2=qa-tm-all2.westus.com\n' +
+                        'SERVER_QA2=qa-sample-all2.westus.com\n' +
                         'scp -oStrictHostKeyChecking=no -i ${qa_keyfile} $WORKSPACE_DEPLOY_SCRIPT ${qa_username}@$SERVER_QA2:/tmp/${REMOTE_SCRIPT}\n' +
                         'scp -oStrictHostKeyChecking=no -i ${qa_keyfile} $WORKSPACE_TEMPLATE_SERVICE ${qa_username}@$SERVER_QA2:/tmp/template.service\n' +
                         'ssh -oStrictHostKeyChecking=no -i ${qa_keyfile} -tt ${qa_username}@$SERVER_QA2 sudo su -c "\'chmod +x /tmp/${REMOTE_SCRIPT}; cd /tmp; ./${REMOTE_SCRIPT}\'" || exit 1\n' +

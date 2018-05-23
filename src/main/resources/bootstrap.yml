@@ -9,7 +9,7 @@ spring:
       discovery:
         enabled: false
   application:
-    name: tm-api-event-seats
+    name: sample-api-event-seats
 
 eureka:
   client:

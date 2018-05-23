@@ -30,9 +30,9 @@ The databases is built using liquibase.  It's also loaded with 4 event id's (1, 
 To view the database console go to http://localhost:3020/console/login.jsp.  From the console, you can run queries to view / modify data.  
 
 #### The database connection info:
-* JDBC URL: jdbc:h2:mem:~/ticketmaster;
-* User Name: ticketmaster
-* Password: ticketmaster
+* JDBC URL: jdbc:h2:mem:~/sample;
+* User Name: sample
+* Password: sample
 * Driver Class: org.h2.Driver
 
 #### Message Locale

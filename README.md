@@ -1,6 +1,6 @@
 # Spring Boot Event Seats REST API
 
-### This application is an assessment project for REST API that can return the following
+### This application is an sample project for REST API that can return the following
 * Total count of seats available for a given event.
 * Seat count based on seats available for a given event.
 * Seat count based on type for a given event.

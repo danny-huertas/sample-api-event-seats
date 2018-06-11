@@ -30,7 +30,7 @@ public class SeatEntitySpecification implements Specification<SeatEntity> {
      * Creates a WHERE clause for a query of the seat entity in form of a {@link Predicate} for the given
      * {@link Root} and {@link CriteriaQuery}.
      *
-     * @param root seat entity root
+     * @param root  seat entity root
      * @param query criteria query for the seat entity
      * @return a {@link Predicate} built off the criteria builder for a seat entity
      */
@@ -43,14 +43,14 @@ public class SeatEntitySpecification implements Specification<SeatEntity> {
      * Adds predicates for the given {@link Root} and {@link CriteriaQuery}.
      *
      * @param root seat entity root
-     * @param cb criteria builder for the seat entity
+     * @param cb   criteria builder for the seat entity
      * @return a {@link Predicate} array built off the criteria builder for a seat entity
      */
     private Predicate[] addPredicates(Root<SeatEntity> root, CriteriaBuilder cb) {
         List<Predicate> predicates = new ArrayList<>();
 
         //add any seat properties that are not null to the list of predicates
-        Arrays.stream(seat.getClass().getDeclaredFields()).forEach(field -> {
+        Arrays.stream(seat.getClass().getDeclaredFields()).filter(field -> !field.isSynthetic()).forEach(field -> {
             try {
                 field.setAccessible(true);
                 Object value = field.get(seat);

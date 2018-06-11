@@ -17,3 +17,8 @@ src/main/generated/
 
 application.log*
 .DS_Store
+gradle/
+gradlew
+gradlew.bat
+out/production/resources/
+out/test/resources/

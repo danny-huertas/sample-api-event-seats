@@ -1,6 +1,6 @@
 package com.sample.api.event.seats.resource.dao;
 
-import com.sample.api.event.seats.domain.Seat;
+import com.sample.api.event.seats.model.SeatDto;
 import com.sample.api.event.seats.resource.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,12 +18,12 @@ public class SeatDao {
     }
 
     /**
-     * Retrieves seat count based on search criteria for a given event.
+     * Retrieves seatDto count based on search criteria for a given event.
      *
-     * @param seat domain object for a seat
+     * @param seatDto model object for a seatDto
      * @return Returns the count of seats that match the given search criteria within a given event.
      */
-    public Long getSeatCount(Seat seat) {
-        return seatRepository.count(new SeatEntitySpecification(seat));
+    public Long getSeatCount(SeatDto seatDto) {
+        return seatRepository.count(new SeatEntitySpecification(seatDto));
     }
 }

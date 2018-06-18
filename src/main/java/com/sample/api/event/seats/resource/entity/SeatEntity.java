@@ -1,13 +1,8 @@
 package com.sample.api.event.seats.resource.entity;
 
-import com.sample.api.event.seats.domain.SeatType;
+import com.sample.api.event.seats.model.SeatTypeDto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -21,7 +16,7 @@ public class SeatEntity implements Serializable {
     private Long eventId;
     private Boolean isAvailable;
     private Boolean isAisle;
-    private SeatType seatType;
+    private SeatTypeDto seatTypeDto;
 
     @Id
     @Column
@@ -62,11 +57,11 @@ public class SeatEntity implements Serializable {
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    public SeatType getSeatType() {
-        return seatType;
+    public SeatTypeDto getSeatTypeDto() {
+        return seatTypeDto;
     }
 
-    public void setSeatType(SeatType seatType) {
-        this.seatType = seatType;
+    public void setSeatTypeDto(SeatTypeDto seatTypeDto) {
+        this.seatTypeDto = seatTypeDto;
     }
 }

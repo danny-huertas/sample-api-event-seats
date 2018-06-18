@@ -1,11 +1,11 @@
-package com.sample.api.event.seats.domain;
+package com.sample.api.event.seats.model;
 
 import java.util.Arrays;
 
 /**
  * This enum class is used to return a seat type
  */
-public enum SeatType {
+public enum SeatTypeDto {
     ADULT,
     CHILD;
 
@@ -15,7 +15,7 @@ public enum SeatType {
      * @param val seat type as a string
      * @return seat type object
      */
-    public static SeatType get(String val) {
+    public static SeatTypeDto get(String val) {
         return val != null ?
                 Arrays.stream(values()).filter(e -> e.name().equalsIgnoreCase(val)).findFirst()
                         .orElseThrow(() -> new IllegalStateException(String.format("Unsupported type %s.", val))) :

@@ -71,7 +71,7 @@ public class ExceptionHandling {
      * @param ex exception to be handled
      */
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-    @ExceptionHandler(value = { InvalidMediaTypeException.class, HttpMediaTypeNotSupportedException.class })
+    @ExceptionHandler(value = {InvalidMediaTypeException.class, HttpMediaTypeNotSupportedException.class})
     public void handleUnsupportedMediaTypeException(Exception ex) {
         /*
          * This method doesn't return any response body, exception or error can
@@ -86,8 +86,8 @@ public class ExceptionHandling {
      * @param ex exception to be handled
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = { MissingServletRequestParameterException.class, ServletRequestBindingException.class,
-            MissingServletRequestPartException.class, BindException.class })
+    @ExceptionHandler(value = {MissingServletRequestParameterException.class, ServletRequestBindingException.class,
+            MissingServletRequestPartException.class, BindException.class})
     public void handleBadRequestException(Exception ex) {
         /*
          * This method doesn't return any response body, exception or error can
@@ -117,8 +117,8 @@ public class ExceptionHandling {
      * @param ex exception to be handled
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(value = { MissingPathVariableException.class, ConversionNotSupportedException.class,
-            HttpMessageNotWritableException.class })
+    @ExceptionHandler(value = {MissingPathVariableException.class, ConversionNotSupportedException.class,
+            HttpMessageNotWritableException.class})
     public void handleInternalServerErrorException(Exception ex) {
         /*
          * This method doesn't return any response body, exception or error can
@@ -133,7 +133,7 @@ public class ExceptionHandling {
      * @param ex exception to be handled
      */
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(value = { NoHandlerFoundException.class })
+    @ExceptionHandler(value = {NoHandlerFoundException.class})
     public void handleNotFoundException(Exception ex) {
         /*
          * This method doesn't return any response body, exception or error can
@@ -161,7 +161,7 @@ public class ExceptionHandling {
      * Handles a global exception
      *
      * @param request original request received
-     * @param ex exception to be handled
+     * @param ex      exception to be handled
      * @return error response body.
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -184,13 +184,13 @@ public class ExceptionHandling {
      * Handles a sql exception
      *
      * @param request original request received
-     * @param ex exception to be handled
+     * @param ex      exception to be handled
      * @return error response body.
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(value = { CannotCreateTransactionException.class, SQLException.class, PersistenceException.class,
+    @ExceptionHandler(value = {CannotCreateTransactionException.class, SQLException.class, PersistenceException.class,
             GenericJDBCException.class, InvalidDataAccessResourceUsageException.class,
-            DataAccessResourceFailureException.class, JDBCConnectionException.class })
+            DataAccessResourceFailureException.class, JDBCConnectionException.class})
     @ResponseBody
     public OperationError handleSQLException(final HttpServletRequest request, final Exception ex) {
         /*
@@ -209,11 +209,11 @@ public class ExceptionHandling {
      * Handles an invalid data format exception
      *
      * @param request original request received
-     * @param ex exception to be handled
+     * @param ex      exception to be handled
      * @return error response body.
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = { MethodArgumentTypeMismatchException.class, TypeMismatchException.class })
+    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class, TypeMismatchException.class})
     @ResponseBody
     public OperationError handleInvalidDataFormatException(final HttpServletRequest request, final Exception ex) {
         LOGGER.error("MethodArgumentTypeMismatchException occurred ", ex);
@@ -227,11 +227,11 @@ public class ExceptionHandling {
      * Handles an invalid data format exception
      *
      * @param request original request received
-     * @param ex exception to be handled
+     * @param ex      exception to be handled
      * @return error response body.
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = { IllegalStateException.class })
+    @ExceptionHandler(value = {IllegalStateException.class})
     @ResponseBody
     public OperationError handleInvalidDataValueException(final HttpServletRequest request, final Exception ex) {
         LOGGER.error("IllegalStateException occurred ", ex);
@@ -251,7 +251,7 @@ public class ExceptionHandling {
     @ExceptionHandler(value = InvalidAcceptLanguageException.class)
     @ResponseBody
     public OperationError handleInvalidAcceptLanguageException(final HttpServletRequest request,
-            final InvalidAcceptLanguageException ex) {
+                                                               final InvalidAcceptLanguageException ex) {
         /*
          * errorMessage for this method is hard-coded since this is thrown in RequestInterceptor and the
          * messages.properties files will not be loaded to provide a meaningful response back.
@@ -273,7 +273,7 @@ public class ExceptionHandling {
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     @ResponseBody
     public OperationError handleDataTypeMismatchException(final HttpServletRequest request,
-            final HttpMessageNotReadableException ex) {
+                                                          final HttpMessageNotReadableException ex) {
         LOGGER.error("Message not readable exception occurred ", ex);
         return errorHelper
                 .errorResponse(ErrorConstants.ERROR_CODE_REQUEST_BODY_INVALID, tracer.getCurrentSpan().traceIdString(),
@@ -314,11 +314,11 @@ public class ExceptionHandling {
      * Handler for Bean Validation Framework exceptions.
      *
      * @param traceId traceId of the request
-     * @param ex exception that occurred during processing the request
+     * @param ex      exception that occurred during processing the request
      * @return error response body
      */
     private OperationError handleMethodArgumentNotValidException(String traceId,
-            final MethodArgumentNotValidException ex) {
+                                                                 final MethodArgumentNotValidException ex) {
         final List<String> validationErrors = ex.getBindingResult().getAllErrors().stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
 

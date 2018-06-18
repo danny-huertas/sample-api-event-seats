@@ -4,6 +4,8 @@ import com.sample.api.common.localization.SmartLocaleResolver;
 import com.sample.api.event.seats.controllers.SeatController;
 import com.sample.api.event.seats.interceptor.RequestInterceptor;
 import org.h2.server.web.WebServlet;
+import org.modelmapper.Conditions;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
@@ -35,6 +37,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ConfigurationProperties(prefix = "root.config")
 public class SpringRootConfig extends WebMvcConfigurerAdapter {
     public static final String REQUEST_MAPPING = "/tm/v1/seats";
+    public static final String ATTENDEE_REQUEST_MAPPING = REQUEST_MAPPING + "/attendee";
     private String title;
     private String description;
     private String version;
@@ -192,5 +195,19 @@ public class SpringRootConfig extends WebMvcConfigurerAdapter {
     private ApiInfo metaData() {
         return new ApiInfoBuilder().title(title).description(description).version(version)
                 .contact(new Contact(contactName, contactUrl, contactEmail)).build();
+    }
+
+    /**
+     * Sets the model mapper used to convert dto's to entities
+     *
+     * @return a model mapper
+     */
+    @Bean
+    public ModelMapper modelMapper() {
+        ModelMapper modelMapper = new ModelMapper();
+
+        //only map (replace) properties that aren't null (don't replace entity set properties with null dto properties)
+        modelMapper.getConfiguration().setAmbiguityIgnored(true).setPropertyCondition(Conditions.isNotNull());
+        return modelMapper;
     }
 }

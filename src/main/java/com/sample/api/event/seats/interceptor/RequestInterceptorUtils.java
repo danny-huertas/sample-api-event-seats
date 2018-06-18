@@ -31,7 +31,7 @@ class RequestInterceptorUtils {
      *
      * @param request the current incoming HTTP request
      * @throws InvalidAcceptLanguageException thrown if the current request specifies the "accept-language" header with
-     *         an incorrect value.
+     *                                        an incorrect value.
      */
     static void checkAcceptLanguageHeader(HttpServletRequest request) {
         String acceptLangHeader = request.getHeader(HttpHeaders.ACCEPT_LANGUAGE);

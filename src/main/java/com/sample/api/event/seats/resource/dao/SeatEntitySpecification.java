@@ -1,7 +1,7 @@
 package com.sample.api.event.seats.resource.dao;
 
 import com.sample.api.common.exception.InvalidQueryParamException;
-import com.sample.api.event.seats.domain.Seat;
+import com.sample.api.event.seats.model.SeatDto;
 import com.sample.api.event.seats.resource.entity.SeatEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,19 +20,19 @@ import java.util.List;
  */
 public class SeatEntitySpecification implements Specification<SeatEntity> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SeatEntitySpecification.class);
-    private Seat seat;
+    private SeatDto seatDto;
 
-    SeatEntitySpecification(Seat seat) {
-        this.seat = seat;
+    SeatEntitySpecification(SeatDto seatDto) {
+        this.seatDto = seatDto;
     }
 
     /**
-     * Creates a WHERE clause for a query of the seat entity in form of a {@link Predicate} for the given
+     * Creates a WHERE clause for a query of the seatDto entity in form of a {@link Predicate} for the given
      * {@link Root} and {@link CriteriaQuery}.
      *
-     * @param root  seat entity root
-     * @param query criteria query for the seat entity
-     * @return a {@link Predicate} built off the criteria builder for a seat entity
+     * @param root  seatDto entity root
+     * @param query criteria query for the seatDto entity
+     * @return a {@link Predicate} built off the criteria builder for a seatDto entity
      */
     @Override
     public Predicate toPredicate(Root<SeatEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -42,18 +42,18 @@ public class SeatEntitySpecification implements Specification<SeatEntity> {
     /**
      * Adds predicates for the given {@link Root} and {@link CriteriaQuery}.
      *
-     * @param root seat entity root
-     * @param cb   criteria builder for the seat entity
-     * @return a {@link Predicate} array built off the criteria builder for a seat entity
+     * @param root seatDto entity root
+     * @param cb   criteria builder for the seatDto entity
+     * @return a {@link Predicate} array built off the criteria builder for a seatDto entity
      */
     private Predicate[] addPredicates(Root<SeatEntity> root, CriteriaBuilder cb) {
         List<Predicate> predicates = new ArrayList<>();
 
-        //add any seat properties that are not null to the list of predicates
-        Arrays.stream(seat.getClass().getDeclaredFields()).filter(field -> !field.isSynthetic()).forEach(field -> {
+        //add any seatDto properties that are not null to the list of predicates
+        Arrays.stream(seatDto.getClass().getDeclaredFields()).filter(field -> !field.isSynthetic()).forEach(field -> {
             try {
                 field.setAccessible(true);
-                Object value = field.get(seat);
+                Object value = field.get(seatDto);
 
                 //if the field isn't null, add it to the list of predicates
                 if (value != null) {

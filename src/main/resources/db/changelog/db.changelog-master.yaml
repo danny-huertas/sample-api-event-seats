@@ -38,6 +38,31 @@ databaseChangeLog:
               - column:
                   name: type
                   type: varchar(16)
+        - createTable:
+            tableName: attendee
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(16)
+              - column:
+                  name: last_name
+                  type: varchar(16)
+              - column:
+                  name: company
+                  type: varchar(16)
+              - column:
+                  name: title
+                  type: varchar(16)
+              - column:
+                  name: bio
+                  type: varchar(500)
         - sqlFile:
             dbms: h2
             encoding: utf8

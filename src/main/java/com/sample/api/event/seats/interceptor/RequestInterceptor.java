@@ -14,9 +14,9 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
     /**
      * This implementation runs interceptor checks and always returns {@code true}
      *
-     * @param request the current incoming servlet request
+     * @param request  the current incoming servlet request
      * @param response the current outgoing servlet response
-     * @param handler the handler (or {@link HandlerMethod})
+     * @param handler  the handler (or {@link HandlerMethod})
      * @return {@code true}
      */
     @Override

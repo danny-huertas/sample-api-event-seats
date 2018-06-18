@@ -1,27 +1,27 @@
-package com.sample.api.event.seats.domain;
+package com.sample.api.event.seats.model;
 
 /**
  * Domain object for a seat.
  */
-public class Seat {
+public class SeatDto {
     private Long id;
     private Long eventId;
     private Boolean available;
     private Boolean aisle;
-    private SeatType seatType;
+    private SeatTypeDto seatTypeDto;
 
-    private Seat(SeatBuilder seatBuilder) {
+    private SeatDto(SeatBuilder seatBuilder) {
         this.id = seatBuilder.builderSeatId;
         this.eventId = seatBuilder.builderEventId;
         this.available = seatBuilder.builderIsAvailable;
         this.aisle = seatBuilder.builderIsAisle;
-        this.seatType = SeatType.get(seatBuilder.builderSeatType);
+        this.seatTypeDto = SeatTypeDto.get(seatBuilder.builderSeatType);
     }
 
     @Override
     public String toString() {
-        return "Seat{" + "id=" + id + ", eventId=" + eventId + ", available=" + available + ", aisle=" + aisle
-                + ", seatType=" + seatType + '}';
+        return "SeatDto{" + "id=" + id + ", eventId=" + eventId + ", available=" + available + ", aisle=" + aisle
+                + ", seatTypeDto=" + seatTypeDto + '}';
     }
 
     /**
@@ -59,8 +59,8 @@ public class Seat {
             return this;
         }
 
-        public Seat build() {
-            return new Seat(this);
+        public SeatDto build() {
+            return new SeatDto(this);
         }
     }
 }

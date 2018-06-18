@@ -48,7 +48,7 @@ public abstract class LogAspectBase {
      * via {@link ProceedingJoinPoint#getArgs()}, changes them as needed and passes them as <code>args</code>
      *
      * @param joinPoint keeps the info about class, method and parameters and is used to proceed with the target
-     * @param args array of arguments to be logged
+     * @param args      array of arguments to be logged
      * @return {@link Object} returned from invoking {@link ProceedingJoinPoint#proceed()}
      * @throws Throwable from {@link ProceedingJoinPoint#proceed()}
      */
@@ -82,7 +82,7 @@ public abstract class LogAspectBase {
      * via {@link ProceedingJoinPoint#getArgs()}, changes them as needed and passes them as <code>args</code>.
      *
      * @param joinPoint keeps the info about class, method and parameters and is used to proceed with the target
-     * @param args array of arguments to be logged
+     * @param args      array of arguments to be logged
      * @return {@link Object} returned from invoking {@link ProceedingJoinPoint#proceed()}
      * @throws Throwable from {@link ProceedingJoinPoint#proceed()}
      */
@@ -114,7 +114,7 @@ public abstract class LogAspectBase {
      * via {@link ProceedingJoinPoint#getArgs()}, changes them as needed and passes them as <code>args</code>
      *
      * @param joinPoint keeps the info about class, method and parameters and is used to proceed with the target
-     * @param args array of arguments to be logged
+     * @param args      array of arguments to be logged
      * @return {@link Object} returned from invoking {@link ProceedingJoinPoint#proceed()}
      * @throws Throwable from {@link ProceedingJoinPoint#proceed()}
      */

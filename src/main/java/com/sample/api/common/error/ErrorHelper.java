@@ -28,8 +28,8 @@ public class ErrorHelper {
     /**
      * This method is used to build an array of errors that is returned in the operation body response
      *
-     * @param errors List of errors that were detected during api. The
-     *         format of these errors is {code}-{field}-{message}
+     * @param errors  List of errors that were detected during api. The
+     *                format of these errors is {code}-{field}-{message}
      * @param traceId traceId of the request
      * @return Error bean to be converted to error response
      */
@@ -60,15 +60,15 @@ public class ErrorHelper {
     /**
      * This method is used to set the operation body response with the single error.
      *
-     * @param errorCode code of error that was detected
-     * @param traceId traceId of the request
+     * @param errorCode    code of error that was detected
+     * @param traceId      traceId of the request
      * @param errorMessage error message
-     * @param moreInfo more info field
-     * @param startTime start time of the api
+     * @param moreInfo     more info field
+     * @param startTime    start time of the api
      * @return Error bean to be converted to error response
      */
     public OperationError errorResponse(final String errorCode, final String traceId, final String errorMessage,
-            final String moreInfo, final Object startTime) {
+                                        final String moreInfo, final Object startTime) {
         //build and return the operation error object
         return new OperationError(new Operation.ApiOperationBuilder().result(Result.ERROR).correlationId(traceId)
                 .errors(Collections.singletonList(
